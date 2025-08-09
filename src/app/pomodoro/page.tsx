@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import formatTime from "../../../utils/formatTime";
+import { ensureNotificationPermission, notify } from "../../../utils/notifications";
+import { playBell, primeBell } from "../../../utils/sound";
 
 export default function PomodoroPage() {
     const [durationMin, setDurationMin] = useState<number>(25);
@@ -21,6 +23,9 @@ export default function PomodoroPage() {
             setRemainingSec((s) => {
                 if (s <= 1) {
                     clearInterval(id);
+                    setIsRunning(false)
+                    playBell();
+                    notify("¡Pomodoro terminado!", "Tomate un descanso 🙂");
                     return 0;
                 }
                 return s - 1;
@@ -29,9 +34,13 @@ export default function PomodoroPage() {
         return () => clearInterval(id);
     }, [isRunning]);
 
-    const handleButton = () => {
+    const handleButton = async () => {
         if (!isRunning && remainingSec === 0) {
             setRemainingSec(durationMin * 60);
+        }
+        if (!isRunning) {
+            await ensureNotificationPermission();
+            await primeBell();
         }
         setIsRunning((r) => !r);
     };
