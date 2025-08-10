@@ -1,10 +1,24 @@
-const DashboardPage = () => {
+"use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+
+export const dynamic = "force-dynamic";
+
+export default function DashboardPage() {
+    const { status, data } = useSession();
+    const router = useRouter();
+
+    useEffect(() => {
+        if (status === "unauthenticated") router.replace("/login");
+    }, [status, router]);
+
+    if (status !== "authenticated") return null;
+
     return (
-        <main className="p-6">
-            <h1 className="text-2xl font-bold">Dashboard</h1>
-            <p className="mt-2 text-sm text-slate-600">Sección privada (stub).</p>
-        </main>
+        <section className="space-y-4">
+            <h2 className="text-2xl font-semibold">Dashboard</h2>
+            <p className="text-sm text-slate-600">Hola, {data?.user?.name}</p>
+        </section>
     );
 }
-
-export default DashboardPage;
