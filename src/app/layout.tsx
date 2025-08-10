@@ -26,6 +26,7 @@ export default function RootLayout({
                             <Link href="/pomodoro" className="hover:underline">Pomodoro</Link>
                             <Link href="/login" className="hover:underline">Login</Link>
                             <Link href="/dashboard" className="hover:underline">Dashboard</Link>
+                            <Link href="/music" className="hover:underline">Música</Link>
                         </nav>
 
                         <div className="ml-auto">
