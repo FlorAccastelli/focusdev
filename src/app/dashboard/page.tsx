@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Tasks from "app/components/tasks/Tasks";
+import ReminderProvider from "app/components/reminders/ReminderProvider";
+import ReminderSettingsCard from "./ReminderSettingsCard";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +25,8 @@ export default function DashboardPage() {
             <h1 className="text-2xl font-semibold">Tus tareas</h1>
             <p className="text-sm text-slate-600">Crea, marca como completadas, edita o elimina tus tareas.</p>
             <Tasks />
+            <ReminderProvider />
+            <ReminderSettingsCard />
         </section>
     );
 }

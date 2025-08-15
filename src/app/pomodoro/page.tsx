@@ -1,56 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import formatTime from "../../../utils/formatTime";
-import { ensureNotificationPermission, notify } from "../../../utils/notifications";
-import { playBell, primeBell } from "../../../utils/sound";
+import { usePomodoro } from "../../context/PomodoroContext";
 
 export default function PomodoroPage() {
-    const [durationMin, setDurationMin] = useState<number>(25);
-    const [remainingSec, setRemainingSec] = useState<number>(25 * 60);
-    const [isRunning, setIsRunning] = useState<boolean>(false);
+    const {
+        durationMin,
+        remainingSec,
+        isRunning,
+        setDurationMin,
+        startPause,
+        reset,
+    } = usePomodoro();
 
     const handleSelectChange: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         const mins = Number(e.currentTarget.value);
         setDurationMin(mins);
-        setRemainingSec(mins * 60);
-        setIsRunning(false);
-    };
-
-    useEffect(() => {
-        if (!isRunning) return;
-        const id = setInterval(() => {
-            setRemainingSec((s) => {
-                if (s <= 1) {
-                    clearInterval(id);
-                    setIsRunning(false)
-                    playBell();
-                    notify("¡Pomodoro terminado!", "Tomate un descanso 🙂");
-                    return 0;
-                }
-                return s - 1;
-            });
-        }, 1000);
-        return () => clearInterval(id);
-    }, [isRunning]);
-
-    const handleButton = async () => {
-        if (!isRunning && remainingSec === 0) {
-            setRemainingSec(durationMin * 60);
-        }
-        if (!isRunning) {
-            await ensureNotificationPermission();
-            await primeBell();
-        }
-        setIsRunning((r) => !r);
-    };
-
-    const handleReset = () => {
-        setIsRunning(false);
-        setRemainingSec(durationMin * 60);
     };
 
     const label = formatTime(remainingSec);
+
     return (
         <main className="min-h-[calc(100dvh-4rem)] flex items-center justify-center p-6">
             <section
@@ -59,7 +28,7 @@ export default function PomodoroPage() {
             >
                 <header className="mb-6">
                     <h1 id="pomodoro-title" className="text-2xl font-bold">Pomodoro</h1>
-                    <p className="mt-1 text-sm text-slate-600">Estructura inicial con lógica básica.</p>
+                    <p className="mt-1 text-sm text-slate-600">Timer persistente entre secciones.</p>
                 </header>
 
                 <div className="flex flex-col items-center gap-6">
@@ -71,14 +40,14 @@ export default function PomodoroPage() {
                         <button
                             type="button"
                             className="col-span-2 rounded-xl px-4 py-2 text-base font-medium border border-slate-300 hover:bg-slate-50 active:scale-[0.99] transition"
-                            onClick={handleButton}
+                            onClick={startPause}
                         >
                             {isRunning ? "Pause" : "Start"}
                         </button>
                         <button
                             type="button"
                             className="rounded-xl px-4 py-2 text-base font-medium border border-slate-300 text-slate-700 hover:bg-slate-50 active:scale-[0.99] transition"
-                            onClick={handleReset}
+                            onClick={reset}
                             disabled={remainingSec === durationMin * 60 && !isRunning}
                             title="Resetear timer"
                         >
@@ -97,7 +66,7 @@ export default function PomodoroPage() {
                             onChange={handleSelectChange}
                             disabled={isRunning}
                         >
-                            <option value={15}>15</option>
+                            <option value={1}>1</option>
                             <option value={20}>20</option>
                             <option value={25}>25</option>
                             <option value={30}>30</option>
@@ -108,4 +77,3 @@ export default function PomodoroPage() {
         </main>
     );
 }
-

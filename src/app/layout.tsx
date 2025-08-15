@@ -3,6 +3,8 @@ import Link from "next/link";
 import "./globals.css";
 import UserMenu from "./components/UserMenu";
 import Providers from "./providers";
+import ReminderProvider from "./components/reminders/ReminderProvider";
+import { PomodoroProvider } from "context/PomodoroContext";
 
 export const metadata: Metadata = {
     title: "FocusDev",
@@ -33,8 +35,10 @@ export default function RootLayout({
                             <UserMenu />
                         </div>
                     </header>
-
-                    <main className="container mx-auto p-4">{children}</main>
+                    <PomodoroProvider>
+                        <main className="container mx-auto p-4">{children}</main>
+                        <ReminderProvider />
+                    </PomodoroProvider>
                 </Providers>
             </body>
         </html>
