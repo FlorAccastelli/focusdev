@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import { tasksCol } from "../collection";
 import { ObjectId } from "mongodb";
-// import { auth } from "@/auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../../lib/auth";
 
 export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
-  // const session = await auth();
-  // const userId = session?.user?.email ?? null;
-  const userId = null;
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
+  const userId = session?.user?.email ?? null;
 
   const { id } = await params;
   if (!ObjectId.isValid(id)) return NextResponse.json({ error: "invalid id" }, { status: 400 });
@@ -26,9 +29,11 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ id: st
 }
 
 export async function DELETE(_req: Request, { params }: { params: Promise<{ id: string }> }) {
-  // const session = await auth();
-  // const userId = session?.user?.email ?? null;
-  const userId = null;
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
+  const userId = session?.user?.email ?? null;
 
   const { id } = await params;
   if (!ObjectId.isValid(id)) return NextResponse.json({ error: "invalid id" }, { status: 400 });

@@ -3,17 +3,19 @@ export const runtime = "nodejs";
 import { NextResponse } from "next/server";
 import { tasksCol } from "./collection";
 import { TaskSchema } from "../../../types/task";
-// import { auth } from "@/auth"; // si usás next-auth
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../lib/auth";
 
 function escapeRegex(s: string) {
-  // escapa caracteres especiales para regex
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 export async function GET(req: Request) {
-  // const session = await auth();
-  // const userId = session?.user?.email ?? null;
-  const userId = null; // cámbialo cuando conectes auth
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
+  const userId = session?.user?.email ?? null;
   const { searchParams } = new URL(req.url);
   const q = searchParams.get("q")?.trim();
 
@@ -21,7 +23,7 @@ export async function GET(req: Request) {
 
   const filter: any = { userId };
   if (q) {
-    const rx = `^${escapeRegex(q)}`; // prefijo -> usa índice { title: 1 }
+    const rx = `^${escapeRegex(q)}`;
     filter.title = { $regex: rx, $options: "i" };
   }
 
@@ -30,9 +32,11 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  // const session = await auth();
-  // const userId = session?.user?.email ?? null;
-  const userId = null;
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+  }
+  const userId = session?.user?.email ?? null;
   const body = await req.json();
   const now = Date.now();
 
