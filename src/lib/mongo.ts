@@ -1,20 +1,27 @@
-import { MongoClient, MongoClientOptions, ServerApiVersion } from "mongodb";
+import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri = process.env.MONGODB_URI!;
-const options: MongoClientOptions = {
-  serverApi: { version: ServerApiVersion.v1, strict: true, deprecationErrors: true },
-};
+let client: MongoClient | null = null;
+let promise: Promise<MongoClient> | null = null;
 
-declare global {
-  // eslint-disable-next-line no-var
-  var _mongoClientPromise: Promise<MongoClient> | undefined;
+export async function getMongoClient() {
+  if (client) return client;
+
+  if (!promise) {
+    const uri = process.env.MONGODB_URI;
+    if (!uri || !uri.trim()) {
+      throw new Error("MONGODB_URI no está definida");
+    }
+
+    promise = new MongoClient(uri, {
+      serverApi: { version: ServerApiVersion.v1, strict: true, deprecationErrors: true },
+    })
+      .connect()
+      .then((c) => {
+        client = c;
+        return c;
+      });
+  }
+
+  return promise;
 }
 
-const clientPromise: Promise<MongoClient> =
-  global._mongoClientPromise ?? new MongoClient(uri, options).connect();
-
-if (process.env.NODE_ENV === "development") {
-  global._mongoClientPromise = clientPromise;
-}
-
-export default clientPromise;
