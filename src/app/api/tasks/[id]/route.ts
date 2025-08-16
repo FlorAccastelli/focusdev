@@ -2,20 +2,18 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { tasksCol } from "../collection";
 import { ObjectId } from "mongodb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../../lib/auth";
 
-export async function PATCH(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PATCH(req: NextRequest, ctx: any) {
+  const { params } = ctx as { params: { id: string } };
+
   const session = await getServerSession(authOptions);
-  if (!session) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
-  }
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const userId = session.user?.email ?? null;
 
   const { id } = params;
@@ -39,14 +37,11 @@ export async function PATCH(
   return NextResponse.json(res);
 }
 
-export async function DELETE(
-  _req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function DELETE(_req: NextRequest, ctx: any) {
+  const { params } = ctx as { params: { id: string } };
+
   const session = await getServerSession(authOptions);
-  if (!session) {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
-  }
+  if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const userId = session.user?.email ?? null;
 
   const { id } = params;
@@ -57,4 +52,3 @@ export async function DELETE(
   if (!res.deletedCount) return NextResponse.json({ error: "not found" }, { status: 404 });
   return NextResponse.json({ ok: true });
 }
-
