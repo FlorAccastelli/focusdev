@@ -20,7 +20,7 @@ export default function ReminderSettingsCard() {
         <div className="border rounded-2xl p-4 space-y-4">
             <h3 className="text-lg font-semibold">Recordatorios</h3>
             <p className="text-sm text-gray-600">
-                Mostramos toasts predefinidos: Hidratación (cada 2h) y Postura (cada 1h). No se pueden crear recordatorios personalizados.
+                Mostramos toasts predefinidos: Hidratación (cada 2h) y Postura (cada 1h).
             </p>
             <label className="flex items-center gap-2">
                 <input type="checkbox" checked={master} onChange={e => setMaster(e.target.checked)} />

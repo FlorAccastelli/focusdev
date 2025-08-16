@@ -1,14 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
-import { ensureNotificationPermission, notify } from "../../../../utils/notifications"; // ⬅️ nuevo
-
+import { ensureNotificationPermission, notify } from "../../../../utils/notifications";
 type ReminderKey = "hydration" | "posture";
 
 const DEFAULTS = {
     masterEnabled: true,
-    hydration: { enabled: true, everyMs: 5 * 60 * 1000 },
-    posture: { enabled: true, everyMs: 2 * 60 * 1000 },
+    hydration: { enabled: true, everyMs: 2 * 60 * 60 * 1000 },
+    posture: { enabled: true, everyMs: 60 * 60 * 1000 },
 };
 
 function readLS<T>(key: string, fallback: T): T {
@@ -72,7 +70,6 @@ export default function ReminderProvider() {
                 requireInteraction: false,
                 silent: false,
             });
-            toast(message, { autoClose: 6000 });
         }
 
         function schedule(
@@ -107,7 +104,6 @@ export default function ReminderProvider() {
                     "💧 Tomá 1 vaso de agua",
                     "reminders.hydration.last",
                     "hydration",
-                    "/icons/water.png"
                 );
             }
             if (postureEnabled) {
@@ -117,7 +113,6 @@ export default function ReminderProvider() {
                     "🧘 Revisá tu postura: alargá la espalda y relajá hombros",
                     "reminders.posture.last",
                     "posture",
-                    "/icons/posture.png"
                 );
             }
         }

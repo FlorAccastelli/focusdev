@@ -1,14 +1,12 @@
 export async function ensureNotificationPermission(): Promise<boolean> {
   if (typeof window === "undefined" || !("Notification" in window)) return false;
 
-  // secure context: https or localhost
   const isSecure = window.isSecureContext || location.hostname === "localhost";
   if (!isSecure) return false;
 
   if (Notification.permission === "granted") return true;
   if (Notification.permission === "denied") return false;
 
-  // 'default' -> pedir permiso (ideal: desde gesto del usuario)
   const res = await Notification.requestPermission();
   return res === "granted";
 }

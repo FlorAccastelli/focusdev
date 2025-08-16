@@ -34,7 +34,9 @@ export default function Tasks() {
         if (filter === "active") return tasks.filter(t => !t.done);
         if (filter === "done") return tasks.filter(t => t.done);
         return tasks;
-    }, [tasks, filter]);
+    }, [tasks, filter, q]);
+
+    console.log('q', q)
 
     async function addTask(e: React.FormEvent) {
         e.preventDefault();
@@ -61,6 +63,14 @@ export default function Tasks() {
     async function deleteTask(id: string) {
         await fetch(`/api/tasks/${id}`, { method: "DELETE" });
         setTasks(prev => prev.filter(t => t._id !== id));
+    }
+
+    function handlerSearch(e) {
+        const value = e.target.value;
+        setQ(value)
+        if (value.trim() === '') {
+            fetchTasks('')
+        }
     }
 
     return (
@@ -99,7 +109,7 @@ export default function Tasks() {
                 >
                     <input
                         value={q}
-                        onChange={(e) => setQ(e.target.value)}
+                        onChange={handlerSearch}
                         placeholder="Buscar por título…"
                         className="rounded border border-slate-300 px-3 py-1.5"
                     />
@@ -123,7 +133,7 @@ export default function Tasks() {
                             onBlur={(e) => {
                                 const val = e.currentTarget.value.trim();
                                 if (val && val !== t.title) renameTask(t._id, val);
-                                else e.currentTarget.value = t.title; // rollback visual
+                                else e.currentTarget.value = t.title;
                             }}
                             className={`flex-1 bg-transparent outline-none ${t.done ? "line-through text-slate-400" : ""}`}
                         />
