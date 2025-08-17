@@ -5,6 +5,7 @@ import UserMenu from "./components/UserMenu";
 import Providers from "./providers";
 import ReminderProvider from "./components/reminders/ReminderProvider";
 import { PomodoroProvider } from "context/PomodoroContext";
+import Footer from "./components/footer/Footer";
 
 export const metadata: Metadata = {
     title: "FocusDev",
@@ -39,6 +40,7 @@ export default function RootLayout({
                     <PomodoroProvider>
                         <main className="container mx-auto p-4">{children}</main>
                         <ReminderProvider />
+                        <Footer />
                     </PomodoroProvider>
                 </Providers>
             </body>
