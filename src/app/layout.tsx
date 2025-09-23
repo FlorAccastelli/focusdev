@@ -19,24 +19,32 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es">
-            <body className="min-h-screen bg-white text-slate-900 antialiased">
+            <body className="min-h-screen bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
                 <Providers>
-                    <header className="p-4 border-b border-slate-200 flex items-center gap-4">
-                        <h1 className="text-lg font-bold mr-2">FocusDev</h1>
+                    <header className="sticky top-0 z-40 bg-white/70 backdrop-blur border-b border-slate-200 dark:bg-slate-900/70 dark:border-slate-800">
+                        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6">
+                            <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 rounded-md px-3 py-1 bg-amber-500 text-white">
+                                Saltar al contenido
+                            </a>
 
-                        <nav className="flex gap-4">
-                            <Link href="/" className="hover:underline">Home</Link>
-                            <Link href="/pomodoro" className="hover:underline">Pomodoro</Link>
-                            <Link href="/login" className="hover:underline">Login</Link>
-                            <Link href="/dashboard" className="hover:underline">Dashboard</Link>
-                            <Link href="/music" className="hover:underline">Música</Link>
-                            <Link href="/contact" className="hover:underline">Contacto</Link>
-                        </nav>
+                            <h1 className="text-xl font-bold tracking-tight">
+                                <span className="text-blue-600">Focus</span>Dev
+                            </h1>
 
-                        <div className="ml-auto">
-                            <UserMenu />
+                            <nav aria-label="Principal" className="flex gap-3 text-sm">
+                                <Link href="/" className="px-2 py-1 rounded-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-slate-800">Home</Link>
+                                <Link href="/pomodoro" className="px-2 py-1 rounded-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-slate-800">Pomodoro</Link>
+                                <Link href="/music" className="px-2 py-1 rounded-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-slate-800">Música</Link>
+                                <Link href="/dashboard" className="px-2 py-1 rounded-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-slate-800">Dashboard</Link>
+                                <Link href="/contact" className="px-2 py-1 rounded-md hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:hover:bg-slate-800">Contacto</Link>
+                            </nav>
+
+                            <div className="ml-auto">
+                                <UserMenu />
+                            </div>
                         </div>
                     </header>
+
                     <PomodoroProvider>
                         <main className="container mx-auto p-4">{children}</main>
                         <ReminderProvider />

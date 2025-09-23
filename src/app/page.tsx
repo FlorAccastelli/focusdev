@@ -1,19 +1,45 @@
 export default function HomePage() {
     return (
-        <main className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-100 text-center px-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-indigo-700 mb-4">
-                Bienvenido a <span className="text-purple-600">FocusDev</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-8">
-                Una plataforma para mejorar tu concentración y bienestar como desarrollador 🚀
-            </p>
-            <a
-                href="/pomodoro"
-                className="px-6 py-3 bg-indigo-600 text-white rounded-xl shadow-lg hover:bg-indigo-700 transition"
-            >
-                Empezar ahora
-            </a>
+        <main id="main" className="relative isolate">
+            {/* fondo gradiente */}
+            <div
+                aria-hidden
+                className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900"
+            />
+
+            <section className="mx-auto max-w-6xl px-6 pt-16 pb-20 text-center sm:pt-20 md:pt-28">
+                <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
+                    Bienvenido a <span className="text-blue-600">FocusDev</span>
+                </h1>
+
+                <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg text-slate-600 dark:text-slate-300">
+                    Plataforma para mejorar tu concentración y bienestar como desarrollador. Pomodoro, recordatorios, tareas y música en un solo lugar.
+                </p>
+
+                <div className="mt-8 flex items-center justify-center gap-3">
+                    <a
+                        href="/pomodoro"
+                        className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-slate-900"
+                    >
+                        Empezar ahora
+                    </a>
+                    <a
+                        href="/music"
+                        className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-blue-700 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-blue-300 dark:bg-slate-800 dark:hover:bg-slate-700"
+                    >
+                        Explorar música
+                    </a>
+                </div>
+
+                {/* badges de confianza */}
+                <div className="mt-8 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                    <span className="rounded-full border px-3 py-1">Sincronizado con Spotify</span>
+                    <span className="rounded-full border px-3 py-1">Accesible y responsivo</span>
+                    <span className="rounded-full border px-3 py-1">Modo oscuro</span>
+                </div>
+            </section>
         </main>
     );
 }
+
 
