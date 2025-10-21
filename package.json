@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.9",
+    "@heroicons/react": "^2.2.0",
     "dayjs": "^1.11.13",
     "framer-motion": "^12.23.12",
     "mongodb": "^6.18.0",

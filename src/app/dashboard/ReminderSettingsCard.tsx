@@ -1,5 +1,8 @@
 "use client";
+
 import { useEffect, useState } from "react";
+import ToggleSwitch from "../components/ToggleSwitch";
+import { BellIcon } from "@heroicons/react/24/solid";
 
 export default function ReminderSettingsCard() {
     const [master, setMaster] = useState(true);
@@ -12,29 +15,33 @@ export default function ReminderSettingsCard() {
         setPosture(JSON.parse(localStorage.getItem("reminders.posture.enabled") ?? "true"));
     }, []);
 
-    useEffect(() => { localStorage.setItem("reminders.masterEnabled", JSON.stringify(master)); }, [master]);
-    useEffect(() => { localStorage.setItem("reminders.hydration.enabled", JSON.stringify(hydration)); }, [hydration]);
-    useEffect(() => { localStorage.setItem("reminders.posture.enabled", JSON.stringify(posture)); }, [posture]);
+    useEffect(() => {
+        localStorage.setItem("reminders.masterEnabled", JSON.stringify(master));
+    }, [master]);
+    useEffect(() => {
+        localStorage.setItem("reminders.hydration.enabled", JSON.stringify(hydration));
+    }, [hydration]);
+    useEffect(() => {
+        localStorage.setItem("reminders.posture.enabled", JSON.stringify(posture));
+    }, [posture]);
 
     return (
-        <div className="border rounded-2xl p-4 space-y-4">
-            <h3 className="text-lg font-semibold">Recordatorios</h3>
-            <p className="text-sm text-gray-600">
-                Mostramos toasts predefinidos: Hidratación (cada 2h) y Postura (cada 1h).
-            </p>
-            <label className="flex items-center gap-2">
-                <input type="checkbox" checked={master} onChange={e => setMaster(e.target.checked)} />
-                Activar recordatorios
-            </label>
-            <div className="grid gap-2 md:grid-cols-2">
-                <label className="flex items-center gap-2">
-                    <input type="checkbox" checked={hydration} onChange={e => setHydration(e.target.checked)} disabled={!master} />
-                    Hidratación (cada 2h)
-                </label>
-                <label className="flex items-center gap-2">
-                    <input type="checkbox" checked={posture} onChange={e => setPosture(e.target.checked)} disabled={!master} />
-                    Postura (cada 1h)
-                </label>
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-4 space-y-4 bg-white/5">
+            <div className="flex items-center gap-2 font-medium text-sm">
+                <BellIcon className="h-5 w-5 text-blue-500" />
+                Recordatorios
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+                <ToggleSwitch
+                    enabled={hydration}
+                    setEnabled={setHydration}
+                    label="Hidratación (cada 2h)"
+                />
+                <ToggleSwitch
+                    enabled={posture}
+                    setEnabled={setPosture}
+                    label="Postura (cada 1h)"
+                />
             </div>
         </div>
     );
