@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es">
-            <body className="min-h-screen bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+            <body className="h-screen bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
                 <Providers>
                     <header className="sticky top-0 z-40 bg-white/70 backdrop-blur border-b border-slate-200 dark:bg-slate-900/70 dark:border-slate-800">
                         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-6">

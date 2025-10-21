@@ -23,7 +23,7 @@ export default function UserMenu() {
             <span className="text-sm text-slate-700">Hola, {firstName} 👋</span>
             <button
                 onClick={() => signOut()}
-                className="rounded-xl border px-4 py-2 text-sm hover:bg-slate-50"
+                className="rounded-xl border px-4 py-2 text-sm hover:bg-slate-50 hover:text-slate-700"
             >
                 Cerrar sesión
             </button>
