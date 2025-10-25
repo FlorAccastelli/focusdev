@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ReactNode } from "react";
 import { ensureNotificationPermission, notify } from "../../../../utils/notifications";
 type ReminderKey = "hydration" | "posture";
 
@@ -31,7 +31,7 @@ function nextDelayFromLast(last: number | null, everyMs: number) {
     return Math.max(1000, remaining);
 }
 
-export default function ReminderProvider() {
+export default function ReminderProvider({ children }: { children: ReactNode },) {
     const [masterEnabled, setMasterEnabled] = useState<boolean>(true);
     const [hydrationEnabled, setHydrationEnabled] = useState<boolean>(true);
     const [postureEnabled, setPostureEnabled] = useState<boolean>(true);
@@ -136,5 +136,5 @@ export default function ReminderProvider() {
             }
         };
     }, [masterEnabled, hydrationEnabled, postureEnabled]);
-    return null;
+    return <>{children}</>;
 }

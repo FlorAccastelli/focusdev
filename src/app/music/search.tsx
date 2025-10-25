@@ -31,18 +31,18 @@ export default function MusicSearch() {
     }
 
     return (
-        <section className="space-y-4">
-            <form onSubmit={onSearch} className="flex gap-2">
+        <section className="space-y-6">
+            <form onSubmit={onSearch} className="flex flex-col sm:flex-row gap-3">
                 <input
                     value={q}
                     onChange={(e) => setQ(e.target.value)}
                     placeholder="Buscar playlists (ej. lo-fi, focus, coding)"
-                    className="flex-1 rounded border border-slate-300 px-3 py-2"
+                    className="flex-1 rounded border border-slate-300 px-3 py-2 text-sm"
                 />
                 <button
                     type="submit"
                     disabled={loading || !q.trim()}
-                    className="px-4 py-2 rounded border border-slate-300 hover:bg-slate-50 disabled:opacity-60"
+                    className="px-4 py-2 rounded border border-slate-300 text-sm hover:bg-slate-50 disabled:opacity-60 cursor-pointer"
                 >
                     {loading ? "Buscando..." : "Buscar"}
                 </button>
@@ -84,13 +84,14 @@ export default function MusicSearch() {
                                 </div>
 
                                 {p?.id && (
-                                    <iframe
-                                        className="w-full rounded-lg"
-                                        src={`https://open.spotify.com/embed/playlist/${p.id}`}
-                                        height="352"
-                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                        loading="lazy"
-                                    />
+                                    <div className="w-full overflow-hidden rounded-lg aspect-[4/3]">
+                                        <iframe
+                                            className="w-full h-full"
+                                            src={`https://open.spotify.com/embed/playlist/${p.id}`}
+                                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                            loading="lazy"
+                                        />
+                                    </div>
                                 )}
                             </li>
                         );
@@ -99,7 +100,9 @@ export default function MusicSearch() {
             )}
 
             {items.length === 0 && !loading && q.trim() && (
-                <p className="text-sm text-muted-foreground">Sin resultados para “{q.trim()}”.</p>
+                <p className="text-sm text-muted-foreground">
+                    Sin resultados para “{q.trim()}”.
+                </p>
             )}
         </section>
     );

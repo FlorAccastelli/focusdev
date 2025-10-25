@@ -15,7 +15,7 @@ export default async function MusicPage() {
             <header className="space-y-2">
                 <h1 className="text-2xl font-semibold">Música para concentrarte</h1>
                 <p className="text-slate-600">
-                    Esta sección es pública. Buscá playlists o probá las sugeridas.
+                    Buscá playlists o probá las sugeridas.
                 </p>
             </header>
 

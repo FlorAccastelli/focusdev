@@ -26,12 +26,13 @@ export default function ReminderSettingsCard() {
     }, [posture]);
 
     return (
-        <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-4 space-y-4 bg-white/5">
-            <div className="flex items-center gap-2 font-medium text-sm">
-                <BellIcon className="h-5 w-5 text-blue-500" />
-                Recordatorios
+        <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900 shadow-sm space-y-4">
+            <div className="flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400">
+                <BellIcon className="h-5 w-5" />
+                Recordatorios activos
             </div>
-            <div className="grid gap-2 sm:grid-cols-2">
+
+            <div className="grid sm:grid-cols-2 gap-3">
                 <ToggleSwitch
                     enabled={hydration}
                     setEnabled={setHydration}
@@ -46,3 +47,4 @@ export default function ReminderSettingsCard() {
         </div>
     );
 }
+

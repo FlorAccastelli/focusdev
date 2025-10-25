@@ -19,11 +19,11 @@ export default function UserMenu() {
     const firstName = session.user?.name?.split(" ")[0] ?? "dev";
 
     return (
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col md:flex-row items-center gap-3">
             <span className="text-sm text-slate-700">Hola, {firstName} 👋</span>
             <button
                 onClick={() => signOut()}
-                className="rounded-xl border px-4 py-2 text-sm hover:bg-slate-50 hover:text-slate-700 "
+                className="rounded-xl border px-4 py-2 text-sm hover:bg-slate-50 hover:text-slate-700 cursor-pointer"
             >
                 Cerrar sesión
             </button>

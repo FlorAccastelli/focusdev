@@ -140,7 +140,7 @@ export default function Tasks() {
 
                         <button
                             onClick={() => deleteTask(t._id)}
-                            className="text-red-500 opacity-0 group-hover:opacity-100 transition"
+                            className="text-red-500 opacity-100 md:opacity-0 group-hover:opacity-100 transition cursor-pointer"
                             aria-label="Eliminar tarea"
                         >
                             <TrashIcon className="h-5 w-5" />
