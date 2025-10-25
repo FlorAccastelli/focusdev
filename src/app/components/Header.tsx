@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import UserMenu from "./UserMenu";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +37,8 @@ export default function Header() {
 
                 </nav>
 
-                <div className="hidden md:block">
+                <div className="hidden md:flex gap-3">
+                    <ThemeToggle />
                     <UserMenu />
                 </div>
             </div>
@@ -48,8 +50,9 @@ export default function Header() {
                         onClick={() => setIsOpen(false)}
                     ></div>
 
-                    <aside className="fixed top-0 right-0 h-screen w-64 bg-white dark:bg-slate-900 p-6 z-50 shadow-2xl transition-transform duration-300">
-                        <div className="flex justify-between items-center mb-4">
+                    <aside className="fixed top-0 right-0 h-screen w-64 bg-white dark:bg-slate-900 p-6 z-50 shadow-2xl transition-transform duration-300 flex flex-col">
+                        {/* Header */}
+                        <div className="flex justify-between items-center mb-6">
                             <h2 className="text-lg font-semibold">Menú</h2>
                             <button
                                 className="text-2xl font-bold focus:outline-none"
@@ -59,7 +62,8 @@ export default function Header() {
                             </button>
                         </div>
 
-                        <nav className="flex flex-col gap-3 text-sm">
+                        {/* Links */}
+                        <nav className="flex flex-col gap-6 text-base flex-grow">
                             <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
                             <Link href="/pomodoro" onClick={() => setIsOpen(false)}>Pomodoro</Link>
                             <Link href="/music" onClick={() => setIsOpen(false)}>Música</Link>
@@ -67,12 +71,21 @@ export default function Header() {
                             <Link href="/contact" onClick={() => setIsOpen(false)}>Contacto</Link>
                         </nav>
 
-                        <div className="mt-6 border-t pt-4 border-slate-200 dark:border-slate-700">
-                            <UserMenu />
+                        {/* Footer fijo abajo */}
+                        <div className="mt-auto pt-5 border-t border-slate-200 dark:border-slate-700 space-y-5">
+                            <div className="flex flex-col items-center">
+                                <UserMenu />
+                            </div>
+
+                            <div className="flex justify-center">
+                                <ThemeToggle />
+                            </div>
                         </div>
+
                     </aside>
                 </>
             )}
+
         </header>
     );
 }
