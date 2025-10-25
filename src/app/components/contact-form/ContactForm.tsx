@@ -8,6 +8,18 @@ export default function ContactForm() {
 
     useEffect(() => setT(Date.now()), []);
 
+    useEffect(() => {
+        if (status === "ok" || status === "error") {
+            const timer = setTimeout(() => {
+                setStatus("idle");
+                setErr("");
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [status]);
+
+
     async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setStatus("sending");
@@ -64,7 +76,7 @@ export default function ContactForm() {
             <button
                 type="submit"
                 disabled={disabled}
-                className="px-4 py-2 rounded border hover:bg-slate-50 hover:text-slate-700 disabled:opacity-60"
+                className="px-4 py-2 rounded border hover:bg-slate-50 hover:text-slate-700 disabled:opacity-60 cursor-pointer"
             >
                 {status === "sending" ? "Enviando…" : "Enviar"}
             </button>

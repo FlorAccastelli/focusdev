@@ -42,7 +42,7 @@ export default function PomodoroPage() {
                         <button
                             type="button"
                             onClick={startPause}
-                            className="col-span-2 rounded-xl px-4 py-2 text-base font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="col-span-2 rounded-xl px-4 py-2 text-base font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
                         >
                             {isRunning ? "Pausar" : "Iniciar"}
                         </button>
@@ -51,7 +51,7 @@ export default function PomodoroPage() {
                             onClick={reset}
                             disabled={remainingSec === durationMin * 60 && !isRunning}
                             title="Resetear timer"
-                            className="rounded-xl px-4 py-2 text-base font-medium border border-slate-300 text-slate-700 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40"
+                            className="rounded-xl px-4 py-2 text-base font-medium border border-slate-300 text-slate-700 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 cursor-pointer"
                         >
                             Reset
                         </button>

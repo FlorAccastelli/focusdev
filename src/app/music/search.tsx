@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Image = { url: string };
 type ExternalUrls = { spotify?: string };
@@ -10,13 +10,28 @@ export default function MusicSearch() {
     const [q, setQ] = useState("");
     const [loading, setLoading] = useState(false);
     const [items, setItems] = useState<Playlist[]>([]);
+    const [hasSearched, setHasSearched] = useState(false);
+
+    useEffect(() => {
+        if (q.trim() === "") {
+            setItems([]);
+            setHasSearched(false);
+        }
+    }, [q]);
+
+
 
     async function onSearch(e: React.FormEvent) {
         e.preventDefault();
         const query = q.trim();
-        if (!query) return;
+        if (!query) {
+            setHasSearched(false);
+            return;
+        }
 
         setLoading(true);
+        setHasSearched(true);
+
         try {
             const res = await fetch(
                 `/api/spotify/search?q=${encodeURIComponent(query)}&type=playlist&limit=12`,
@@ -30,6 +45,7 @@ export default function MusicSearch() {
         }
     }
 
+
     return (
         <section className="space-y-6">
             <form onSubmit={onSearch} className="flex flex-col sm:flex-row gap-3">
@@ -42,7 +58,7 @@ export default function MusicSearch() {
                 <button
                     type="submit"
                     disabled={loading || !q.trim()}
-                    className="px-4 py-2 rounded border border-slate-300 text-sm hover:bg-slate-50 disabled:opacity-60 cursor-pointer"
+                    className="px-4 py-2 rounded border border-slate-300 text-sm  hover:bg-slate-50 hover:text-slate-700 disabled:opacity-60 cursor-pointer"
                 >
                     {loading ? "Buscando..." : "Buscar"}
                 </button>
@@ -99,11 +115,12 @@ export default function MusicSearch() {
                 </ul>
             )}
 
-            {items.length === 0 && !loading && q.trim() && (
+            {hasSearched && items.length === 0 && !loading && (
                 <p className="text-sm text-muted-foreground">
                     Sin resultados para “{q.trim()}”.
                 </p>
             )}
+
         </section>
     );
 }
