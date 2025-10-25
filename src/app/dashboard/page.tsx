@@ -33,11 +33,11 @@ export default function DashboardPage() {
             <section className="space-y-4">
                 <header className="space-y-1">
                     <h2 className="text-xl font-semibold text-white">Tus tareas</h2>
-                    <p className="text-sm text-slate-200/80">
+                    <p className="text-sm dark:text-slate-200/80">
                         Crea, marca como completadas, edita o elimina tus tareas.
                     </p>
                 </header>
-                <div className="rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 p-6 shadow-lg ring-1 ring-slate-700/30">
+                <div className="rounded-xl dark:bg-gradient-to-br from-slate-800 to-slate-900 p-6 shadow-lg ring-1 ring-slate-700/30">
                     <Tasks />
                 </div>
             </section>
@@ -45,7 +45,7 @@ export default function DashboardPage() {
             <section className="space-y-4">
                 <header className="space-y-1">
                     <h2 className="text-xl font-semibold text-white">Recordatorios</h2>
-                    <p className="text-sm text-slate-200/80">
+                    <p className="text-sm dark:text-slate-200/80">
                         Activá los recordatorios automáticos para mantener buenos hábitos mientras trabajás.
                     </p>
                 </header>

@@ -78,7 +78,6 @@ export default function Tasks() {
 
     return (
         <section className="space-y-4">
-            {/* Add task */}
             <form onSubmit={addTask} className="flex gap-2">
                 <input
                     value={title}
@@ -96,7 +95,6 @@ export default function Tasks() {
                 </button>
             </form>
 
-            {/* Filter buttons */}
             <div className="flex flex-wrap items-center gap-2">
                 <div className="inline-flex rounded-lg border overflow-hidden">
                     {(["all", "active", "done"] as const).map((k) => (
@@ -114,10 +112,9 @@ export default function Tasks() {
                 </div>
             </div>
 
-            {/* Task list */}
             <ul className="space-y-2">
                 {filtered.map((t) => (
-                    <li key={t._id} className="group flex items-center justify-between bg-slate-800/40 rounded-xl px-4 py-3 mb-2 shadow hover:bg-slate-800 transition">
+                    <li key={t._id} className="group flex items-center justify-between dark:bg-slate-800/40 rounded-xl px-4 py-3 mb-2 shadow dark:hover:bg-slate-800 transition">
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => toggleTask(t._id, t.done)}
@@ -134,7 +131,7 @@ export default function Tasks() {
                                     if (val && val !== t.title) renameTask(t._id, val);
                                     else e.currentTarget.value = t.title;
                                 }}
-                                className={`bg-transparent outline-none text-sm md:text-base ${t.done ? "line-through text-slate-400" : "text-slate-100"}`}
+                                className={`bg-transparent outline-none text-sm md:text-base ${t.done ? "line-through dark:text-slate-400" : "dark:text-slate-100"}`}
                             />
                         </div>
 
