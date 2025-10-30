@@ -54,7 +54,7 @@ export default function ContactForm() {
     const disabled = useMemo(() => status === "sending", [status]);
 
     return (
-        <form onSubmit={onSubmit} className="space-y-3 max-w-lg">
+        <form onSubmit={onSubmit} className="space-y-3 w-full">
             <div className="grid gap-2">
                 <label className="text-sm font-medium">Nombre</label>
                 <input name="name" required className="rounded border px-3 py-2" />

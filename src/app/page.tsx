@@ -1,13 +1,12 @@
 export default function HomePage() {
     return (
         <main id="main" className="relative isolate">
-            {/* fondo gradiente */}
             <div
                 aria-hidden
-                className="absolute inset-0 -z-10 bg-gradient-to-br from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900"
+                className="absolute inset-0 -z-10 bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900"
             />
 
-            <section className="mx-auto max-w-6xl px-6 pt-16 pb-20 text-center sm:pt-20 md:pt-28">
+            <section className="mx-auto max-w-6xl px-6 py-24 flex flex-col items-center justify-center text-center min-h-[calc(100vh-10rem)]">
                 <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-slate-100">
                     Bienvenido a <span className="text-blue-600">FocusDev</span>
                 </h1>
@@ -31,7 +30,6 @@ export default function HomePage() {
                     </a>
                 </div>
 
-                {/* badges de confianza */}
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-2 text-xs text-slate-500 dark:text-slate-400">
                     <span className="rounded-full border px-3 py-1">Sincronizado con Spotify</span>
                     <span className="rounded-full border px-3 py-1">Accesible y responsivo</span>
@@ -41,5 +39,8 @@ export default function HomePage() {
         </main>
     );
 }
+
+
+
 
 

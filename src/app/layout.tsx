@@ -19,13 +19,13 @@ export default function RootLayout({
 }) {
     return (
         <html lang="es" suppressHydrationWarning>
-            <body className="min-h-screen bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+            <body className="flex min-h-screen flex-col bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
                 <ThemeProviderClient>
                     <Providers>
                         <ReminderProvider>
                             <PomodoroProvider>
                                 <Header />
-                                <main id="main">{children}</main>
+                                <main id="main" className="flex-grow">{children}</main>
                                 <Footer />
                             </PomodoroProvider>
                         </ReminderProvider>

@@ -9,7 +9,6 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
-    // 🔁 Redirigir si ya está logueado
     useEffect(() => {
         if (status === "authenticated") {
             router.replace("/dashboard");
@@ -26,7 +25,7 @@ export default function LoginPage() {
     };
 
     return (
-        <main className="min-h-[calc(100dvh-4rem)] flex items-center justify-center p-6">
+        <main className="min-h-[calc(100dvh-10rem)] flex items-center justify-center p-6">
             {status === "unauthenticated" && (
                 <section className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                     <header className="mb-6 text-center">

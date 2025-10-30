@@ -21,18 +21,23 @@ export default function Header() {
                     <span className="text-blue-600">Focus</span>Dev
                 </h1>
 
-                <button
-                    className="md:hidden px-3 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    onClick={() => setIsOpen(true)}
-                >
-                    ☰
-                </button>
+                <div className="flex items-center gap-2 md:hidden">
+                    <ThemeToggle />
+                    <button
+                        className="px-3 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onClick={() => setIsOpen(true)}
+                        aria-label="Abrir menú"
+                    >
+                        ☰
+                    </button>
+                </div>
+
 
                 <nav className="hidden md:flex gap-4 text-sm items-center">
-                    <Link href="/" className={navLinkClass("/")}>Home</Link>
+                    <Link href="/" className={navLinkClass("/")}>Inicio</Link>
                     <Link href="/pomodoro" className={navLinkClass("/pomodoro")}>Pomodoro</Link>
                     <Link href="/music" className={navLinkClass("/music")}>Música</Link>
-                    <Link href="/dashboard" className={navLinkClass("/dashboard")}>Dashboard</Link>
+                    <Link href="/dashboard" className={navLinkClass("/dashboard")}>Mi espacio</Link>
                     <Link href="/contact" className={navLinkClass("/contact")}>Contacto</Link>
 
                 </nav>
@@ -51,7 +56,6 @@ export default function Header() {
                     ></div>
 
                     <aside className="fixed top-0 right-0 h-screen w-64 bg-white dark:bg-slate-900 p-6 z-50 shadow-2xl transition-transform duration-300 flex flex-col">
-                        {/* Header */}
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-lg font-semibold">Menú</h2>
                             <button
@@ -62,24 +66,19 @@ export default function Header() {
                             </button>
                         </div>
 
-                        {/* Links */}
                         <nav className="flex flex-col gap-6 text-base flex-grow">
-                            <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
+                            <Link href="/" onClick={() => setIsOpen(false)}>Inicio</Link>
                             <Link href="/pomodoro" onClick={() => setIsOpen(false)}>Pomodoro</Link>
                             <Link href="/music" onClick={() => setIsOpen(false)}>Música</Link>
-                            <Link href="/dashboard" onClick={() => setIsOpen(false)}>Dashboard</Link>
+                            <Link href="/dashboard" onClick={() => setIsOpen(false)}>Mi espacio</Link>
                             <Link href="/contact" onClick={() => setIsOpen(false)}>Contacto</Link>
                         </nav>
 
-                        {/* Footer fijo abajo */}
-                        <div className="mt-auto pt-5 border-t border-slate-200 dark:border-slate-700 space-y-5">
+                        <div className="mt-auto mb-5 pt-5 border-t border-slate-200 dark:border-slate-700 space-y-5">
                             <div className="flex flex-col items-center">
                                 <UserMenu />
                             </div>
 
-                            <div className="flex justify-center">
-                                <ThemeToggle />
-                            </div>
                         </div>
 
                     </aside>

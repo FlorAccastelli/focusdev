@@ -23,7 +23,7 @@ export default function DashboardPage() {
         <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
             <section className="space-y-1">
                 <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-                    Bienvenida, {data?.user?.name?.split(" ")[0] ?? "usuario"} 👋
+                    Bienvenido/a, {data?.user?.name?.split(" ")[0] ?? "usuario"} 👋
                 </h1>
                 <p className="text-slate-600 dark:text-slate-400 text-sm">
                     Este es tu espacio personal para organizar tus tareas y cuidar tu bienestar.

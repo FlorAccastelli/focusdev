@@ -21,19 +21,22 @@ export default function PomodoroPage() {
     const label = formatTime(remainingSec);
 
     return (
-        <main className="min-h-[calc(100dvh-4rem)] flex items-center justify-center p-6">
+        <main className="min-h-[calc(100dvh-12rem)] flex items-center justify-center p-6">
             <section
                 aria-labelledby="pomodoro-title"
-                className="w-full max-w-md rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-md p-6 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-800"
+                className="w-full max-w-5xl rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-md p-6 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-800"
             >
-                <header className="mb-6 space-y-1 text-center">
+                <header className="mb-6 mx-auto max-w-full space-y-1 text-center px-6">
                     <h1 id="pomodoro-title" className="text-3xl font-bold">Pomodoro</h1>
                     <p className="text-sm text-slate-600 dark:text-slate-400">
-                        Técnica para mejorar tu productividad mediante ciclos de foco y descanso. El timer se mantiene aunque cambies de sección.
+                        La técnica Pomodoro es un método de gestión del tiempo que divide tu trabajo en intervalos de concentración, llamados “pomodoros”, seguidos por breves pausas para descansar.
+                        Cada ciclo suele durar 25 minutos de foco y 5 minutos de descanso.
+                        El objetivo es mantener la mente fresca, mejorar la productividad y evitar la fatiga mental.
+                        En esta sección podés iniciar, pausar o reiniciar el temporizador, y ajustar la duración de tus sesiones según tus necesidades.
                     </p>
                 </header>
 
-                <div className="flex flex-col items-center gap-6">
+                <div className="max-w-md mx-auto flex flex-col items-center gap-6">
                     <div aria-live="polite" className="text-6xl font-extrabold tabular-nums tracking-tight">
                         {label}
                     </div>
