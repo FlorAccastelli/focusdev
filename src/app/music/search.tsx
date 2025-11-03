@@ -65,7 +65,7 @@ export default function MusicSearch() {
             </form>
 
             {items.length > 0 && (
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {items.map((p) => {
                         if (!p) return null;
 
@@ -75,7 +75,7 @@ export default function MusicSearch() {
                         const id = p?.id ?? `${name}-${img}`;
 
                         return (
-                            <li key={id} className="space-y-3">
+                            <li key={id} className="space-y-2">
                                 <div className="flex items-center gap-3 min-w-0">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
@@ -100,20 +100,20 @@ export default function MusicSearch() {
                                 </div>
 
                                 {p?.id && (
-                                    <div className="w-full overflow-hidden rounded-lg aspect-[4/3]">
-                                        <iframe
-                                            className="w-full h-full"
-                                            src={`https://open.spotify.com/embed/playlist/${p.id}`}
-                                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                            loading="lazy"
-                                        />
-                                    </div>
+                                    <iframe
+                                        className="w-full rounded-lg"
+                                        src={`https://open.spotify.com/embed/playlist/${p.id}`}
+                                        height="352"
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                        loading="lazy"
+                                    />
                                 )}
                             </li>
                         );
                     })}
                 </ul>
             )}
+
 
             {hasSearched && items.length === 0 && !loading && (
                 <p className="text-sm text-muted-foreground">
